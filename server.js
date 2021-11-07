@@ -1,18 +1,14 @@
  const figlet = require('figlet');
- const express = require('express');
  const sequelize = require('./config/connections');
- 
-// boilerplate setup for express
-const app = express();
-const PORT = process.env.PORT || 3001;
+ const inquirer = require('inquirer');
+ const Connection = require('mysql2');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 
 // turn on connection to db and server
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log('Now listening'));
+    starMenu();
   });
   
 
@@ -35,4 +31,75 @@ figlet.text('EMPLOYEE TRACKER -->', {
 });
 }
 createBanner();
+
+
+
+
+
+
+// Create Main Menu 
+
+const starMenu = ()=> {
+    inquirer
+      .prompt(
+          {
+            name: 'action',
+            type: 'list',
+            message: 'What would you like to do?',
+            choices:[
+                'View all employees',
+                'Add employee',
+                'Update employee role',
+                'View all roles',
+                'Add a role',
+                'View all departments',
+                'Add a department',
+                'Exit',  
+            ],
+
+
+})
+            .then((awnser) =>{
+                switch(awnser.action) {
+                    case 'View all employees':
+                        viewEmp();
+                        break;
+
+                    case 'Add employee':
+                        addEmp();
+                        break;
+                    
+                    case 'Update employee role':
+                        updateEmp();
+                        break;
+
+                    case 'View all roles':
+                        viewRoles();
+                        break;
+
+                    case 'Add a role':
+                        addRole();
+                        break;
+
+                    case 'View all departments':
+                        viewDepartments();
+                        break;
+
+                    case 'Add a department':
+                        addDepartment();
+                        break;
+
+                    case 'Exit':
+                        Connection.end();
+                        break;
+
+                    default:
+                        console.log(`Please try again, not valid: ${awnser.action}`)
+                        break;
+
+                }
+
+            })
+
+};
 
