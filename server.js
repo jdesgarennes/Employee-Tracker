@@ -1,13 +1,23 @@
- var figlet = require('figlet');
+ const figlet = require('figlet');
+ const express = require('express');
+ const sequelize = require('./config/connections');
+ 
+// boilerplate setup for express
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-// figlet('THE EMPLOYEEE TRACKER!!!!', function(err, data) {
-//     if (err) {
-//         console.log('Something went wrong...');
-//         console.dir(err);
-//         return;
-//     }
-//     console.log(data)
-// });
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+// turn on connection to db and server
+sequelize.sync({ force: false }).then(() => {
+    app.listen(PORT, () => console.log('Now listening'));
+  });
+  
+
+// Beginning of my cool Banner using figlet npm package  
+const createBanner = () =>{
 
 figlet.text('EMPLOYEE TRACKER -->', {
     font: 'DOS Rebel',
@@ -23,13 +33,6 @@ figlet.text('EMPLOYEE TRACKER -->', {
     }
     console.log(data);
 });
+}
+createBanner();
 
-
-// figlet.fonts(function(err, fonts) {
-//     if (err) {
-//         console.log('something went wrong...');
-//         console.dir(err);
-//         return;
-//     }
-//     console.dir(fonts);
-// });
