@@ -7,7 +7,6 @@
 
 // turn on connection to db and server
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log('Now listening'));
     starMenu();
   });
   
@@ -63,30 +62,37 @@ const starMenu = ()=> {
                 switch(awnser.action) {
                     case 'View all employees':
                         viewEmp();
+                        console.log('you chose view emps');
                         break;
 
                     case 'Add employee':
-                        addEmp();
+                        //addEmp();
+                        console.log('you chose add emps');
                         break;
                     
                     case 'Update employee role':
-                        updateEmp();
+                        //updateEmp();
+                        console.log('you chose update emps');
                         break;
 
                     case 'View all roles':
-                        viewRoles();
+                        //viewRoles();
+                        console.log('you chose view roles');
                         break;
 
                     case 'Add a role':
-                        addRole();
+                        //addRole();
+                        console.log('you chose add roles');
                         break;
 
                     case 'View all departments':
-                        viewDepartments();
+                        //viewDepartments();
+                        console.log('you chose view deps');
                         break;
 
                     case 'Add a department':
-                        addDepartment();
+                        //addDepartment();
+                        console.log('you chose add dept');
                         break;
 
                     case 'Exit':
