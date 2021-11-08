@@ -2,6 +2,7 @@
  const mysql = require('mysql2');
  const inquirer = require('inquirer');
  const table = require('console.table');
+const { INSERT } = require('sequelize/types/lib/query-types');
 
  const createBanner = () =>{
 
@@ -56,7 +57,6 @@ const startMenu = ()=> {
                 'Exit',  
             ],
 
-
 })
             .then((awnser) =>{
                 switch(awnser.action) {
@@ -102,6 +102,9 @@ const startMenu = ()=> {
 
 };
 
+
+const newDpartment = [];
+
 startMenu();
 //  View all employees function
 const viewEmp = () => {
@@ -124,7 +127,7 @@ const viewEmp = () => {
             startMenu();
       })
   }
-
+// View Departments
   const viewDepartments = () =>{
     const query = "SELECT * FROM department";
     con.query(query,(err,results) =>{
@@ -132,4 +135,25 @@ const viewEmp = () => {
         console.table(results);
             startMenu();
       })
+  }
+
+  // Add A department
+
+  const addDepartment = ()=>{  
+    inquirer.prompt([
+          {
+            type: 'input',
+            name: 'deptName',
+            message: 'What is the Department name you want to add?:',      
+  },
+      ])
+      .then(answer =>{
+        con.query(
+            `INSERT INTO departmen (department_name)
+            VALUES ("${answers.newDpartment}")`
+        );
+        deparartment
+      })
+      
+
   }
