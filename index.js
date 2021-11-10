@@ -2,15 +2,15 @@
  const mysql = require('mysql2');
  const inquirer = require('inquirer');
  const table = require('console.table');
-const { INSERT } = require('sequelize/types/lib/query-types');
 
+ // Begining of Super cool banner.. 
  const createBanner = () =>{
 
-    figlet.text('EMPLOYEE TRACKER -->', {
+    figlet.text("\n \n \n \n EMPLOYEE TRACKER -->\n \n \n \n", {
         font: 'DOS Rebel',
         horizontalLayout: 'default',
         verticalLayout: 'default',
-        width: 150,
+        width: 140,
         whitespaceBreak: true
     }, function(err, data) {
         if (err) {
@@ -21,7 +21,7 @@ const { INSERT } = require('sequelize/types/lib/query-types');
         console.log(data);
     });
     }   
-
+    createBanner();
 // Connect to database
 const con = mysql.createConnection(
     {
@@ -31,15 +31,15 @@ const con = mysql.createConnection(
         // TODO: Add MySQL password here
         password: 'password',
         database: 'employee_db'
+        
       },
-      console.log(`Connected to the employee_db database.`)
-   
+      console.log(`Connected to the employee_db database.`)   
 );
  
 
 // Creation fo the Main Menu 
 const startMenu = ()=> {
-
+    
     inquirer
       .prompt(
           {
@@ -149,7 +149,7 @@ const viewEmp = () => {
       ])
       .then(answer =>{
         con.query(
-            `INSERT INTO departmen (department_name)
+            `INSERT INTO department (department_name)
             VALUES ("${answers.newDpartment}")`
         );
         deparartment
