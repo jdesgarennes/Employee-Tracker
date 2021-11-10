@@ -115,7 +115,6 @@ const viewEmp = () => {
       console.table(results);
           startMenu();
     });
-    
   };
 
   // View all Roles Function
@@ -148,26 +147,51 @@ const viewEmp = () => {
           {
             type: 'input',
             name: 'deptName',
-            message: 'What is the Department name you want to add?: ',      
+            message: 'What is the Department name you want to add?: ', 
+                 
   },
       ])
       .then(answer =>{
-        con.query(
-            `INSERT INTO department (name)
-            VALUES ("${answer.deptName}")`
-        );
+        const queryDepartment =`INSERT INTO department (name) VALUES ("${answer.deptName}")`;
+        con.query(queryDepartment,(err,results)=>{
+            if (err) throw(err);
+            console.table(results);
+                startMenu();
+        
       })
-  }
+      })
 
-
+    }
 
   // Begin Add employee function
 
   const addEmp = ()=>{
+
+//const roles =[];
+
+    const queryRole =`SELECT * from role `;
+            con.query(queryRole,(err,results)=>{
+                if (err) throw(err);
+                const roles = results.map(x => {
+                 return  {name:x.title,value:x.id}
+                });
+
+                console.log(roles);
+                
+        // const roleTypes = [{
+        //     name: 'analyst',
+        //     value: 2
+
+        // },
+        // {
+        //     name: 'manager',
+        //     value: 3
+        // }]   
+            
     inquirer.prompt([
         {
             type: 'input',
-            name: 'fistName',
+            name: 'firstName',
             message: 'What is the first name of the new employee?: ',      
          },
 
@@ -180,12 +204,32 @@ const viewEmp = () => {
          {
             type: 'list',
             name: 'Role',
-            message: 'What role is the new Employee?: '
+            message: 'What role is the new Employee?: ',
+            choices: roles,
          }
         ])
-};
+
+        .then(answer =>{
+            const insertRole =`INSERT INTO empoyee (first_name,last_name,role_id) VALUES ("${answer.firstName}","${answer.lastName}","${role.lastName})`;
+            con.query(queryRole),(err,results)=>{
+                if (err) throw(err);
+                console.log(results);
+            }
+            con.query(queryDepartment,(err,results)=>{
+                if (err) throw(err);
+                console.table(results);
+                   startMenu();
+            
+          })
+          })
 
 
+
+
+// };
+
+ })
+}
 // Begin Add Role function
 
 const addRole = ()=>{
@@ -203,3 +247,23 @@ const addRole = ()=>{
          },
         ]
     )}
+
+
+    // Begin Update Employee
+
+    const updateEmp = ()=>{
+        nquirer.prompt([
+            {
+                type: 'list',
+                name: 'name',
+                message: 'Please select name that you want to update.: ',
+            },
+            {
+                type: 'list',
+                name: 'urole',
+                message: 'Please select which role the new employee should be.',
+
+            },
+        ])
+
+    };
