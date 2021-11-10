@@ -226,14 +226,25 @@ const addRole = ()=>{
              name: 'salary',
              message: 'What is the salary of the new role?: ',
          },
-        ]
-    )}
+        ])
+
+        .then(answer =>{
+            const queryRole =`INSERT INTO role (title,salary) VALUES ("${answer.aRole}","${answer.salary}")`;
+            con.query(queryRole,(err,results)=>{
+                if (err) throw(err);
+                console.table(results);
+                    startMenu();
+            
+          })
+          })
+
+    }
 
 
     // Begin Update Employee
 
     const updateEmp = ()=>{
-        nquirer.prompt([
+        inquirer.prompt([
             {
                 type: 'list',
                 name: 'name',
