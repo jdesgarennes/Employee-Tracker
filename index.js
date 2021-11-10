@@ -177,16 +177,7 @@ const viewEmp = () => {
                 });
 
                 console.log(roles);
-                
-        // const roleTypes = [{
-        //     name: 'analyst',
-        //     value: 2
-
-        // },
-        // {
-        //     name: 'manager',
-        //     value: 3
-        // }]   
+        
             
     inquirer.prompt([
         {
@@ -211,22 +202,12 @@ const viewEmp = () => {
 
         .then(answer =>{
             const insertRole =`INSERT INTO empoyee (first_name,last_name,role_id) VALUES ("${answer.firstName}","${answer.lastName}","${role.lastName})`;
-            con.query(queryRole),(err,results)=>{
+            con.query(insertRole),(err,results)=>{
                 if (err) throw(err);
                 console.log(results);
             }
-            con.query(queryDepartment,(err,results)=>{
-                if (err) throw(err);
-                console.table(results);
-                   startMenu();
             
           })
-          })
-
-
-
-
-// };
 
  })
 }
