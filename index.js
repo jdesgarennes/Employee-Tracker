@@ -26,9 +26,7 @@
 const con = mysql.createConnection(
     {
         host: 'localhost',
-        // MySQL username,
         user: 'root',
-        // TODO: Add MySQL password here
         password: 'password',
         database: 'employee_db'
         
@@ -106,6 +104,9 @@ const startMenu = ()=> {
 const newDpartment = [];
 
 startMenu();
+
+//------------------------------------------------------Begin of VIEW FUNCTIONS-----------------------------------------
+
 //  View all employees function
 const viewEmp = () => {
     const query = "SELECT * FROM employee ";
@@ -137,23 +138,68 @@ const viewEmp = () => {
       })
   }
 
-  // Add A department
 
+//--------------------------------------------------------------BEGIN ADD FUNCTIONS-----------------------------------------
+
+
+  // Add A department
   const addDepartment = ()=>{  
     inquirer.prompt([
           {
             type: 'input',
             name: 'deptName',
-            message: 'What is the Department name you want to add?:',      
+            message: 'What is the Department name you want to add?: ',      
   },
       ])
       .then(answer =>{
         con.query(
-            `INSERT INTO department (department_name)
-            VALUES ("${answers.newDpartment}")`
+            `INSERT INTO department (name)
+            VALUES ("${answer.deptName}")`
         );
-        deparartment
       })
-      
-
   }
+
+
+
+  // Begin Add employee function
+
+  const addEmp = ()=>{
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'fistName',
+            message: 'What is the first name of the new employee?: ',      
+         },
+
+         {
+            type: 'input',
+            name: 'lastName',
+            message: 'What is the last name of the new employee?: ',  
+         },
+
+         {
+            type: 'list',
+            name: 'Role',
+            message: 'What role is the new Employee?: '
+         }
+        ])
+};
+
+
+// Begin Add Role function
+
+const addRole = ()=>{
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'aRole',
+            message: 'What is the title of the New role you would like to add?: ',      
+         },
+
+         {
+             type: 'input',
+             name: 'salary',
+             message: 'What is the salary of the new role?: ',
+         },
+        ]
+    )}
