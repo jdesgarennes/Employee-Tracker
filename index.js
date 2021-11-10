@@ -87,7 +87,7 @@ const startMenu = ()=> {
                         break;
 
                     case 'Exit':
-                        Connection.end();
+                        con.end();
                         break;
 
                     default:
@@ -112,7 +112,7 @@ const viewEmp = () => {
     const query = "SELECT * FROM employee ";
     con.query(query, (err, results) => {
       if (err) throw(err);
-      console.table(results);
+        console.table(results);
           startMenu();
     });
   };
@@ -176,7 +176,7 @@ const viewEmp = () => {
                  return  {name:x.title,value:x.id}
                 });
 
-                console.log(roles);
+                //console.log(roles);
         
             
     inquirer.prompt([
@@ -201,12 +201,12 @@ const viewEmp = () => {
         ])
 
         .then(answer =>{
-            const insertRole =`INSERT INTO empoyee (first_name,last_name,role_id) VALUES ("${answer.firstName}","${answer.lastName}","${role.lastName})`;
+            const insertRole =`INSERT INTO employee (first_name,last_name,role_id) VALUES ("${answer.firstName}","${answer.lastName}","${answer.Role}")`;
             con.query(insertRole),(err,results)=>{
                 if (err) throw(err);
                 console.log(results);
             }
-            
+            startMenu();
           })
 
  })
