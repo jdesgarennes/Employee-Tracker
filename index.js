@@ -6,7 +6,7 @@
  // Begining of Super cool banner.. 
  const createBanner = () =>{
 
-    figlet.text("\n \n \n \n EMPLOYEE TRACKER -->\n \n \n \n", {
+    figlet.text("\n \n \n \n EMPLOYEE TRACKER -->", {
         font: 'DOS Rebel',
         horizontalLayout: 'default',
         verticalLayout: 'default',
@@ -64,10 +64,6 @@ const startMenu = ()=> {
 
                     case 'Add employee':
                         addEmp();
-                        break;
-                    
-                    case 'Update employee role':
-                        updateEmp();
                         break;
 
                     case 'View all roles':
@@ -239,23 +235,3 @@ const addRole = ()=>{
           })
 
     }
-
-
-    // Begin Update Employee
-
-    const updateEmp = ()=>{
-        inquirer.prompt([
-            {
-                type: 'list',
-                name: 'name',
-                message: 'Please select name that you want to update.: ',
-            },
-            {
-                type: 'list',
-                name: 'urole',
-                message: 'Please select which role the new employee should be.',
-
-            },
-        ])
-
-    };

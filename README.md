@@ -9,6 +9,10 @@
 
   ## Usage:  The user runs node index.js, the program begins with a really cool banner. The user then is given a selection of choices. When the user selects any of the view options, such as view employees, they will see all employees formated with the table command. The user is then taken back to the main menu. IF the user selects a edit or update command like add role, they will be asked a series of questions, that are required inputs for the table. The user will then be taken back to the main menu. When the user selects exit the user will then exit the program.
 
+  ## link to REPO: https://github.com/jdesgarennes/Employee-Tracker
+  ## link to Video Demo#  https://watch.screencastify.com/v/DHgvxJqkR1adeB9pPcoI
+
+
   ## Questions: johndesgarennes@gmail.com
 
   ## Github username: jdesgarennes
